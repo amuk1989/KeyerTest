@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+
+#folders
+.idea.KeyerTest
+KeyerTest/obj
+KeyerTest/bin
