@@ -33,3 +33,5 @@
 
 #folders
 .idea.KeyerTest
+KeyerTest/obj
+KeyerTest/bin
