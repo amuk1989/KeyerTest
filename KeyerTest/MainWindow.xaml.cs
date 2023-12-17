@@ -21,7 +21,7 @@ namespace KeyerTest
         {
             InitializeComponent();
             
-            _imageProvider = DiInitializer.Container.Locate<IImageProvider>();
+            _imageProvider = DiInitializer.Container.Locate<IImageProvider>();//TO DO: Bad solution
         }
 
         private void OnFileImportClicked(object sender, RoutedEventArgs e)
