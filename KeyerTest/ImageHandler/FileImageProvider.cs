@@ -12,7 +12,7 @@ namespace KeyerTest.ImageHandler
 
         public Bitmap GetLoadedImage()
         {
-            return LoadImage();
+            return _image;
         }
 
         public Bitmap LoadImage()
@@ -28,6 +28,11 @@ namespace KeyerTest.ImageHandler
             }
             
             return _image;
+        }
+
+        public void SetImage(Bitmap bitmap)
+        {
+            _image = bitmap;
         }
     }
 }

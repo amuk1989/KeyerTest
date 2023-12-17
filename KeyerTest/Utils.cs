@@ -12,7 +12,7 @@ public static class Utils
         BitmapImage bi = new BitmapImage();
         bi.BeginInit();
         MemoryStream ms = new MemoryStream();
-        bitmap.Save(ms, ImageFormat.Bmp);
+        bitmap.Save(ms, ImageFormat.Png);
         ms.Seek(0, SeekOrigin.Begin);
         bi.StreamSource = ms;
         bi.EndInit();

@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using Grace.DependencyInjection;
 using Grace.DependencyInjection.Attributes;
+using KeyerTest.CleanColor;
 using KeyerTest.Di;
 using KeyerTest.ImageHandler;
 
@@ -14,6 +15,7 @@ namespace KeyerTest
     public partial class MainWindow : Window, IDisposable
     {
         private readonly IImageProvider _imageProvider;
+        private readonly IImageColorService _imageColorService;
     
         private Color _color = Color.FromArgb(255,255,255,255);
     
@@ -21,23 +23,14 @@ namespace KeyerTest
         {
             InitializeComponent();
             
-            _imageProvider = DiInitializer.Container.Locate<IImageProvider>();//TO DO: Bad solution
+            _imageProvider = DiInitializer.Container.Locate<IImageProvider>();
+            _imageColorService = DiInitializer.Container.Locate<IImageColorService>();
         }
 
         private void OnFileImportClicked(object sender, RoutedEventArgs e)
         {
             var image = _imageProvider.LoadImage();
             MainImage.Source = image.ToBitmapImage();
-        }
-    
-        private void OnFileExportClicked()
-        {
-        
-        }
-    
-        private void OnColorChoseClicked()
-        {
-        
         }
 
         public void Dispose()
@@ -59,6 +52,16 @@ namespace KeyerTest
             if (ColorDisplay == null) return;
         
             ColorDisplay.Background = new SolidColorBrush(_color);
+        }
+
+        private void ChooseColor_OnClick(object sender, RoutedEventArgs e)
+        {
+            var image = _imageColorService
+                .ClearAllPixelsByColor(_imageProvider.GetLoadedImage(), System.Drawing.Color.FromArgb(_color.R, _color.G, _color.B));
+            
+            _imageProvider.SetImage(image);
+            
+            MainImage.Source = image.ToBitmapImage();
         }
     }
 }
