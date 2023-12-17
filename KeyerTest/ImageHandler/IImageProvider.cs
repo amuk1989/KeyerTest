@@ -7,5 +7,6 @@ namespace KeyerTest.ImageHandler
     {
         public Bitmap GetLoadedImage();
         public Bitmap LoadImage();
+        public void SetImage(Bitmap bitmap);
     }
 }
