@@ -1,64 +1,64 @@
-﻿using System.Globalization;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Grace.DependencyInjection;
+using Grace.DependencyInjection.Attributes;
+using KeyerTest.Di;
+using KeyerTest.ImageHandler;
 
-namespace KeyerTest;
-
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
-public partial class MainWindow : Window, IDisposable
+namespace KeyerTest
 {
-    private Color _color = Color.FromArgb(255,255,255,255);
-    public MainWindow()
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window, IDisposable
     {
-        InitializeComponent();
-    }
-
-    private void OnFileImportClicked()
-    {
-        
-    }
+        private readonly IImageProvider _imageProvider;
     
-    private void OnFileExportClicked()
-    {
-        
-    }
+        private Color _color = Color.FromArgb(255,255,255,255);
     
-    private void OnColorChoseClicked()
-    {
-        
-    }
+        public MainWindow()
+        {
+            InitializeComponent();
+            
+            _imageProvider = DiInitializer.Container.Locate<IImageProvider>();
+        }
 
-    public void Dispose()
-    {
+        private void OnFileImportClicked(object sender, RoutedEventArgs e)
+        {
+            var image = _imageProvider.LoadImage();
+            MainImage.Source = image;
+        }
+    
+        private void OnFileExportClicked()
+        {
         
-    }
+        }
+    
+        private void OnColorChoseClicked()
+        {
+        
+        }
 
-    private void ColorBlock_OnTextChanged(object sender, TextChangedEventArgs e)
-    {
-        var textBox = (e.OriginalSource as TextBox);
-        if (textBox == null) return;
+        public void Dispose()
+        {
         
-        if (!byte.TryParse(textBox.Text, out var chanel)) return;
-        Console.WriteLine(textBox.Text);
+        }
+
+        private void ColorBlock_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            var textBox = (e.OriginalSource as TextBox);
+            if (textBox == null) return;
         
-        if (textBox == RBlock) _color.R = chanel;
-        if (textBox == GBlock) _color.G = chanel;
-        if (textBox == BBlock) _color.B = chanel;
+            if (!byte.TryParse(textBox.Text, out var chanel)) return;
         
-        Console.WriteLine(_color);
+            if (textBox == RBlock) _color.R = chanel;
+            if (textBox == GBlock) _color.G = chanel;
+            if (textBox == BBlock) _color.B = chanel;
         
-        if (ColorDisplay == null) return;
+            if (ColorDisplay == null) return;
         
-        ColorDisplay.Background = new SolidColorBrush(_color);
+            ColorDisplay.Background = new SolidColorBrush(_color);
+        }
     }
 }
