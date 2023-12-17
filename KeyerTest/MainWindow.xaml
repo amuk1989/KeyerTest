@@ -10,7 +10,7 @@
     <Grid>
         <StackPanel Width="150" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin ="15 10 0 15">
             <Button x:Name="ImportButton" Click="OnFileImportClicked" Content="Импорт *.png" IsDefault="True" Margin ="0 0 0 10"/>
-            <Button x:Name="ExportButton" Content="Экспорт *.png" IsCancel="True"/>
+            <Button x:Name="ExportButton" Click="ExportButton_OnClick" Content="Экспорт *.png" IsCancel="True"/>
         </StackPanel>
         <StackPanel>
             <Image x:Name="MainImage" Source="/KeyerTest;component/Images/BG.png" Height="540" VerticalAlignment="Top" Margin ="0 10 0 10"/>

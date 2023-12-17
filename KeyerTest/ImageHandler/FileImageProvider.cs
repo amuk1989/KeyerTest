@@ -34,6 +34,11 @@ namespace KeyerTest.ImageHandler
         {
             _image = bitmap;
         }
+
+        public void SaveImage()
+        {
+            _fileLoader.SaveToFile(_image);
+        }
     }
 }
 

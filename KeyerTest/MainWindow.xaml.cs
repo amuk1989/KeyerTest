@@ -63,5 +63,10 @@ namespace KeyerTest
             
             MainImage.Source = image.ToBitmapImage();
         }
+
+        private void ExportButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            _imageProvider.SaveImage();
+        }
     }
 }
