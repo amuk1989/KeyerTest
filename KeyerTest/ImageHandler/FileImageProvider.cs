@@ -5,22 +5,22 @@ namespace KeyerTest.ImageHandler
 {
     public class FileImageProvider(FileLoader fileLoader) : IImageProvider
     {
+        private static int DefaultSize = 100;
         private readonly FileLoader _fileLoader = fileLoader;
         
-        private BitmapImage _image = new();
+        private Bitmap _image = new(DefaultSize, DefaultSize);
 
-        public BitmapImage GetLoadedImage()
+        public Bitmap GetLoadedImage()
         {
             return LoadImage();
         }
 
-        public BitmapImage LoadImage()
+        public Bitmap LoadImage()
         {
             try
             {
                 var path = _fileLoader.LoadFile();
-                var bitMap = new Bitmap(path, true);
-                _image = bitMap.ToBitmapImage();
+                _image = new Bitmap(path, true);
             }
             catch (Exception e)
             {

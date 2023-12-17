@@ -5,7 +5,7 @@ namespace KeyerTest.ImageHandler
 {
     public interface IImageProvider
     {
-        public BitmapImage GetLoadedImage();
-        public BitmapImage LoadImage();
+        public Bitmap GetLoadedImage();
+        public Bitmap LoadImage();
     }
 }

@@ -27,7 +27,7 @@ namespace KeyerTest
         private void OnFileImportClicked(object sender, RoutedEventArgs e)
         {
             var image = _imageProvider.LoadImage();
-            MainImage.Source = image;
+            MainImage.Source = image.ToBitmapImage();
         }
     
         private void OnFileExportClicked()
