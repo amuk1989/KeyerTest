@@ -5,6 +5,7 @@ namespace KeyerTest.CleanColor
 {
     public class ImageColorService:IImageColorService
     {
+        private static int TrashHold = 50;
         public Bitmap ClearAllPixelsByColor(Bitmap image, Color color)
         {
             Bitmap resultBitmap = new Bitmap(image.Width, image.Height, PixelFormat.Format32bppArgb);
@@ -15,7 +16,9 @@ namespace KeyerTest.CleanColor
                 {
                     var pixelColor = image.GetPixel(x, y);
 
-                    if (pixelColor.R == color.R && pixelColor.G == color.G && pixelColor.B == color.B)
+                    if (MathF.Abs(pixelColor.R - color.R) <= TrashHold &&
+                        MathF.Abs(pixelColor.G - color.G) <= TrashHold &&
+                        MathF.Abs(pixelColor.B - color.B) <= TrashHold)
                     {
                         var newColor = Color.FromArgb(0, 255, 255, 255);
                         resultBitmap.SetPixel(x, y, newColor);
